@@ -1,0 +1,42 @@
+const mongoose = require('mongoose');
+
+const paymentSchema = new mongoose.Schema({
+    paymentId: { type: String, required: true },
+    userId: { type: String, required: true },
+    doctorId: { type: String, required: true },
+    appointmentId: { type: String, required: true },
+    actualAmount: { type: Number, required: true },
+    discount: { type: Number, default: 0 },
+    discountType: {
+        type: String,
+        enum: ['percentage', 'flat'],
+        default: 'flat'
+    },
+    finalAmount: { type: Number, required: true },
+    currency: { type: String, default: 'INR' },
+    paymentMethod: {
+        type: String,
+        enum: ['card', 'upi', 'netbanking', 'cash', 'wallet'],
+        required: true,
+        default: 'cash'
+    },
+    paymentStatus: {
+        type: String,
+        enum: ['pending', 'success', 'failed', 'refunded'],
+        default: 'pending'
+    },
+    transactionId: { type: String },
+    paymentGateway: { type: String },
+    paidAt: { type: Date, default: Date.now },
+    createdBy: { type: Date },
+    updatedBy: { type: Date },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
+});
+
+paymentSchema.pre('save', function (next) {
+    this.updatedAt = Date.now();
+    next();
+});
+
+module.exports = mongoose.model('Payment', paymentSchema);

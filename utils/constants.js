@@ -1,0 +1,8 @@
+const SEQUENCE_PREFIX = {
+  PAYMENTS_SEQUENCE: {
+    PAYMENTS_MODEL: "payments",
+    SEQUENCE: "VYDPMT",
+  },
+};
+
+exports.SEQUENCE_PREFIX = SEQUENCE_PREFIX;
