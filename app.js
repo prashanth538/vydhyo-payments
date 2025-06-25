@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 require('dotenv').config();
 const connectDB = require('./utils/db');
 const logger = require('./utils/logger'); 
-const paymentRoutes = require('./routes/paymentsRoutes');
+const financeRoutes = require('./routes/paymentsRoutes');
 // Middleware
 const app = express();
 app.use(express.json());
@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 // Connect to MongoDB
 connectDB();
 // Routes
-app.use('/payment', paymentRoutes);
+app.use('/finance', financeRoutes);
 
 
 // Connect to MongoDB and start server
